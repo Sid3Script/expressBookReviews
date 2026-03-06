@@ -79,17 +79,18 @@ public_users.get('/review/:isbn', function (req, res) {
   }
 });
 
-// Task 10: Get all books using Async/Await with Axios
-public_users.get('/async/books', async (req, res) => {
-  try {
-    const response = await axios.get('http://localhost:5000/');
-    return res.status(200).json(response.data);
-  } catch (error) {
-    return res.status(500).json({ message: "Error fetching books", error: error.message });
-  }
+// Task 10: Get all books using Promise callbacks with Axios
+public_users.get('/async/books', (req, res) => {
+  axios.get('http://localhost:5000/')
+    .then((response) => {
+      return res.status(200).json(response.data);
+    })
+    .catch((error) => {
+      return res.status(500).json({ message: "Error fetching books", error: error.message });
+    });
 });
 
-// Task 11: Get book by ISBN using Async/Await with Axios
+// Task 11: Get book by ISBN using async/await with Axios
 public_users.get('/async/isbn/:isbn', async (req, res) => {
   const isbn = req.params.isbn;
   try {
@@ -100,7 +101,7 @@ public_users.get('/async/isbn/:isbn', async (req, res) => {
   }
 });
 
-// Task 12: Get books by Author using Async/Await with Axios
+// Task 12: Get books by Author using async/await with Axios
 public_users.get('/async/author/:author', async (req, res) => {
   const author = req.params.author;
   try {
@@ -111,7 +112,7 @@ public_users.get('/async/author/:author', async (req, res) => {
   }
 });
 
-// Task 13: Get books by Title using Async/Await with Axios
+// Task 13: Get books by Title using async/await with Axios
 public_users.get('/async/title/:title', async (req, res) => {
   const title = req.params.title;
   try {
